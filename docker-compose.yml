@@ -1,0 +1,36 @@
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongodb
+      MONGO_INITDB_ROOT_PASSWORD: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: mongodb
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mongodb
+      ME_CONFIG_MONGODB_URL: mongodb://mongodb:mongodb@mongo:27017
+      ME_CONFIG_BASICAUTH: false
+
+  classification-score-service:
+    build: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
+    environment:
+      DB_URI: mongodb://mongodb:mongodb@mongo:27017/classification_score_db?authSource=admin
+
+volumes:
+    data:
+
