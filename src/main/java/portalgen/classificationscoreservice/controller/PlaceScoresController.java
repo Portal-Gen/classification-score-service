@@ -27,9 +27,9 @@ public class PlaceScoresController {
         return new Response<>(placeScoresService.getPlaceScores(placeId));
     }
 
-    @GetMapping("/world_city/{worldCityId}")
-    public Response<List<PlaceScores>> getPlaceScoresByWorldCityId(@PathVariable Long worldCityId) {
-        return new Response<>(placeScoresService.getPlaceScoresByWorldCityId(worldCityId));
+    @GetMapping("/city_name/{cityName}")
+    public Response<List<PlaceScores>> getPlaceScoresByCityName(@PathVariable String cityName) {
+        return new Response<>(placeScoresService.getPlaceScoresByCityName(cityName));
     }
 
     @GetMapping("/place/{placeId}/classification_scores")

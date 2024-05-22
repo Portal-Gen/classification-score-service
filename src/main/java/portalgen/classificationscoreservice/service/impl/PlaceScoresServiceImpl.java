@@ -53,8 +53,8 @@ public class PlaceScoresServiceImpl implements PlaceScoresService {
     }
 
     @Override
-    public List<PlaceScores> getPlaceScoresByWorldCityId(Long worldCityId) {
-        return placeScoresRepoService.findByWorldCityId(worldCityId);
+    public List<PlaceScores> getPlaceScoresByCityName(String cityName) {
+        return placeScoresRepoService.findByCityName(cityName);
     }
 
     @Override
@@ -67,20 +67,9 @@ public class PlaceScoresServiceImpl implements PlaceScoresService {
     @Override
     public PlaceScores updatePlaceScores(Long placeId, PlaceScores placeScores) {
         PlaceScores existingPlaceScores = placeScoresRepoService.findByPlaceId(placeId);
-        if (placeScores.getAttributes() != null) {
-            existingPlaceScores.setAttributes(placeScores.getAttributes());
-        }
 
         if (placeScores.getClassificationScores() != null) {
             existingPlaceScores.setClassificationScores(placeScores.getClassificationScores());
-        }
-
-        if (placeScores.getLocation() != null) {
-            existingPlaceScores.setLocation(placeScores.getLocation());
-        }
-
-        if (placeScores.getPriceLevel() != null) {
-            existingPlaceScores.setPriceLevel(placeScores.getPriceLevel());
         }
 
         return placeScoresRepoService.save(existingPlaceScores);

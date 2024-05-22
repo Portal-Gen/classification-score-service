@@ -8,7 +8,7 @@ import java.util.List;
 public interface PlaceRepository extends MongoRepository<PlaceScores, String> {
     PlaceScores findByPlaceId(Long placeId);
 
-    List<PlaceScores> findByWorldCityId(long worldCityId);
+    List<PlaceScores> findByCityName(String cityName);
 
     boolean existsByPlaceId(Long placeId);
 }

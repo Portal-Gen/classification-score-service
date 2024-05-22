@@ -9,7 +9,7 @@ public interface PlaceScoresRepoService {
 
     PlaceScores findByPlaceId(Long placeId);
 
-    List<PlaceScores> findByWorldCityId(Long worldCityId);
+    List<PlaceScores> findByCityName(String cityName);
 
     boolean existsByPlaceId(Long placeId);
 }

@@ -37,20 +37,18 @@ public class PlaceScoresRepoServiceImpl implements PlaceScoresRepoService {
     }
 
     @Override
-    public List<PlaceScores> findByWorldCityId(Long worldCityId) {
-        if (worldCityId == null) {
-            throw new ResponseException(BadRequestError.WORLD_CITY_ID_IS_REQUIRED);
+    public List<PlaceScores> findByCityName(String cityName) {
+        if (cityName == null) {
+            throw new ResponseException(BadRequestError.CITY_NAME_IS_REQUIRED);
         }
 
-        List<PlaceScores> placeScores = placeRepository.findByWorldCityId(worldCityId);
-        
+        List<PlaceScores> placeScores = placeRepository.findByCityName(cityName);
+
         if (placeScores == null) {
             throw new ResponseException(BadRequestError.PLACE_SCORES_NOT_FOUND);
         }
-        
+
         return placeScores;
-        
-        
     }
 
     @Override

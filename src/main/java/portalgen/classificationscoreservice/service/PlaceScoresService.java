@@ -1,6 +1,5 @@
 package portalgen.classificationscoreservice.service;
 
-import portalgen.classificationscoreservice.entity.PlaceAttributes;
 import portalgen.classificationscoreservice.entity.PlaceScores;
 import portalgen.classificationscoreservice.model.enums.PlaceType;
 
@@ -20,12 +19,10 @@ public interface PlaceScoresService {
 
     List<PlaceType> getPlaceTypesAboveThreshold(Long placeId, float threshold);
 
-    List<PlaceScores> getPlaceScoresByWorldCityId(Long worldCityId);
+    List<PlaceScores> getPlaceScoresByCityName(String cityName);
 
     PlaceScores updateClassificationScores(Long placeId, Map<PlaceType, Float> classificationScores);
 
     PlaceScores updatePlaceScores(Long placeId, PlaceScores placeScores);
-
-
 
 }

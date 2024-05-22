@@ -2,9 +2,12 @@ package portalgen.classificationscoreservice.model.enums;
 
 
 
+import lombok.Getter;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 public enum PlaceType {
     UNKNOWN(-1, "unknown"),
     AMUSEMENT_CENTER(0, "amusement_center"),
@@ -69,14 +72,6 @@ public enum PlaceType {
 
     public static PlaceType fromCode(int placeTypeCode) {
         return mapping.getOrDefault(placeTypeCode, UNKNOWN);
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public String getValue() {
-        return value;
     }
 
 }

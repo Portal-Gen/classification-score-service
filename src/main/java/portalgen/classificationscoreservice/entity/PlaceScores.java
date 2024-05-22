@@ -16,12 +16,13 @@ import java.util.Map;
 public class PlaceScores {
     @Id
     private String id;
-    private long worldCityId;
+    private String cityName;
+    private String country;
     private Long placeId;
     private Map<PlaceType, Float> classificationScores;
-    private PlaceAttributes attributes;
-    private PriceLevel priceLevel;
-    private Location location;
+//    private PlaceAttributes attributes;
+//    private PriceLevel priceLevel;
+//    private Location location;
 
     public float getScore(int placeTypeCode) {
         return classificationScores.get(PlaceType.fromCode(placeTypeCode));
