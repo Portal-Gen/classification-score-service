@@ -11,6 +11,7 @@ public enum BadRequestError implements ResponseError {
     PLACE_SCORES_NOT_FOUND(102, "Place scores not found"),
     WORLD_CITY_ID_IS_REQUIRED(103, "World city id is required"),
     PLACE_SCORES_ALREADY_EXISTS(104, "Place scores already exists"),
+    CITY_NAME_IS_REQUIRED(105, "City name is required"),
     ;
 
 
