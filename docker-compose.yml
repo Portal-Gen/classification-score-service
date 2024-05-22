@@ -1,15 +1,16 @@
 services:
 
   mongo:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: mongodb
-      MONGO_INITDB_ROOT_PASSWORD: mongodb
-    ports:
-      - 27017:27017
-    volumes:
-      - ./data:/data/db
+      image: mongo
+      restart: always
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: mongodb
+        MONGO_INITDB_ROOT_PASSWORD: mongodb
+      volumes:
+      - data:/data/db
+      networks:
+        - classification_score_network
+        - shared_network
 
   mongo-express:
     image: mongo-express
@@ -21,16 +22,42 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: mongodb
       ME_CONFIG_MONGODB_URL: mongodb://mongodb:mongodb@mongo:27017
       ME_CONFIG_BASICAUTH: false
+    networks:
+      - classification_score_network
+      - shared_network
 
-  classification-score-service:
+  service:
     build: .
+    environment:
+      DB_URI: mongodb://mongodb:mongodb@mongo:27017/classification_score_db?authSource=admin
+    deploy:
+        replicas: 1
     ports:
       - 8080:8080
     depends_on:
       - mongo
-    environment:
-      DB_URI: mongodb://mongodb:mongodb@mongo:27017/classification_score_db?authSource=admin
+    networks:
+      - classification_score_network
+      - shared_network
+
+  classification-score-service:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "82:82"
+    depends_on:
+      - service
+    networks:
+      - classification_score_network
+      - shared_network
 
 volumes:
     data:
+
+networks:
+  classification_score_network:
+    driver: bridge
+  shared_network:
+    external: true
 
